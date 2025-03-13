@@ -39,7 +39,7 @@ const CheckoutScreen = () => {
 
   return (
     <div className="pb-20 pt-14 min-h-screen flex items-center justify-center">
-      <div className="relative max-w-4xl w-full bg-white shadow-md rounded-lg px-6 py-6 lg:py-10">
+      <div className="relative max-w-4xl w-full mt-16 bg-white shadow-md rounded-lg px-6 py-6 lg:py-10">
         <button
           onClick={() => navigate(-1)}
           className="absolute top-5 left-5 flex items-center space-x-2 text-gray-800 font-bold hover:text-black transition"
@@ -48,7 +48,16 @@ const CheckoutScreen = () => {
           <span className="hidden sm:inline text-lg">Back</span>
         </button>
 
-        <ToastContainer position="top-right" autoClose={1200} />
+        <ToastContainer
+          position="top-right"
+          autoClose={1200}
+          toastStyle={{
+            maxWidth: "300px",
+            width: "90%",
+            borderRadius: "8px",
+            padding: "10px",
+          }}
+        />
 
         <h2 className="text-2xl font-bold mb-6 text-center">Checkout</h2>
         <div className="max-h-60 overflow-y-auto space-y-4 border-b pb-4">
@@ -108,7 +117,7 @@ const CheckoutScreen = () => {
         </div>
         <button
           onClick={handleCheckout}
-          className="w-full bg-red-500 text-white py-2 mt-6 rounded hover:bg-red-600 transition"
+          className="w-full bg-red-500 text-white py-2 mt-14 rounded hover:bg-red-600 transition"
         >
           Place Order
         </button>

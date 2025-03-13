@@ -59,8 +59,7 @@ const Sidebar: React.FC = () => {
           <p className="text-center text-gray-500 mt-4">Your cart is empty.</p>
         )}
       </div>
-
-      <div className="py-4 bg-white shadow-md px-2 border-t">
+      <div className="sticky bottom-0 left-0 w-full py-4 bg-white shadow-md px-2 border-t">
         <div className="flex w-full justify-between items-center mb-2">
           <div className="uppercase font-semibold">
             <span className="mr-2">Total:</span> ${total.toFixed(2)}
@@ -88,5 +87,4 @@ const Sidebar: React.FC = () => {
     </div>
   );
 };
-
 export default Sidebar;

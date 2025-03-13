@@ -24,7 +24,16 @@ const ViewScreen = () => {
         <AiOutlineArrowLeft size={30} className="text-3xl" />
         <span className="hidden md:inline text-lg">Back</span>
       </button>
-      <ToastContainer position="top-right" autoClose={1200} />
+      <ToastContainer
+        position="top-right"
+        autoClose={1200}
+        toastStyle={{
+          maxWidth: "250px",
+          width: "90%",
+          borderRadius: "8px",
+          padding: "10px",
+        }}
+      />
       <div className="grid lg:grid-cols-4 md:grid-cols-2 max-w-[80%] gap-1 mx-auto pt-24 grid-cols-1">
         {cart.length > 0 ? (
           cart.map((item) => (
