@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { BsPlus, BsEyeFill } from "react-icons/bs";
 import type { Product } from "../../../types/productTypes";
@@ -6,17 +5,24 @@ import type { Product } from "../../../types/productTypes";
 interface ProductProps {
   product: Product;
   addToCart: (product: Product) => void;
+  activeProductId: number | null;
+  setActiveProductId: (id: number | null) => void;
 }
 
-const Product: React.FC<ProductProps> = ({ product, addToCart }) => {
+const Product: React.FC<ProductProps> = ({
+  product,
+  addToCart,
+  activeProductId,
+  setActiveProductId,
+}) => {
   const { id, image, category, title, price } = product;
-  const [showIcons, setShowIcons] = useState(false);
+  const isActive = activeProductId === id;
 
   return (
     <div id="products">
       <div
         className="border border-[#e4e4e4] h-[300px] mb-4 relative overflow-hidden group transition"
-        onClick={() => setShowIcons(!showIcons)} // Toggle icons on small screens
+        onClick={() => setActiveProductId(isActive ? null : id)}
       >
         {/* Product Image */}
         <div className="w-full flex justify-center items-center h-full">
@@ -29,13 +35,22 @@ const Product: React.FC<ProductProps> = ({ product, addToCart }) => {
           </div>
         </div>
 
-        {/* Action Buttons (Show on Hover for Large Screens, Click for Small Screens) */}
+        {/* Action Buttons (Fix for Mobile & Desktop) */}
         <div
-          className={`absolute top-6 -right-11 ${
-            showIcons ? "right-5 opacity-100" : "opacity-0"
-          } group-hover:right-5 group-hover:opacity-100 p-2 flex flex-col items-center justify-center gap-y-2 transition-all duration-300`}
+          className={`absolute top-6 right-5 p-2 flex flex-col items-center justify-center gap-y-2 transition-all duration-300
+            ${
+              isActive
+                ? "opacity-100 visible"
+                : "opacity-0 invisible group-hover:opacity-100 group-hover:visible"
+            }`}
         >
-          <button onClick={() => addToCart(product)}>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              addToCart(product);
+              setActiveProductId(null);
+            }}
+          >
             <div className="flex justify-center items-center text-white w-12 h-12 bg-red-500 cursor-pointer">
               <BsPlus className="text-3xl" />
             </div>
@@ -43,13 +58,13 @@ const Product: React.FC<ProductProps> = ({ product, addToCart }) => {
           <Link
             to={`/product/${id}`}
             className="w-12 h-12 bg-white flex justify-center items-center drop-shadow-xl"
+            onClick={(e) => e.stopPropagation()}
           >
             <BsEyeFill />
           </Link>
         </div>
       </div>
 
-      {/* Product Details */}
       <div>
         <div className="text-sm capitalize text-gray-500 mb-1">{category}</div>
         <Link to={`/product/${id}`}>

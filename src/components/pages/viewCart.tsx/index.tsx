@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useCartContext } from "../../../hooks/useCartContext";
 import Product from "../../common/products";
 import { ToastContainer, toast } from "react-toastify";
@@ -7,8 +8,9 @@ import { useNavigate } from "react-router-dom";
 
 const ViewScreen = () => {
   const { cart, addToCart } = useCartContext();
-
   const navigate = useNavigate();
+
+  const [activeProductId, setActiveProductId] = useState<number | null>(null);
 
   const handleAddToCart = (product: Product) => {
     addToCart(product);
@@ -19,11 +21,12 @@ const ViewScreen = () => {
     <section className="px-2 pb-20 md:pb-32">
       <button
         onClick={() => navigate(-1)}
-        className=" fixed left-0 top-1/2 transform -translate-y-1/2 flex items-center space-x-2 text-gray-800 font-bold hover:text-black transition"
+        className="absolute lg:top-20 top-16 left-4 sm:left-6 flex items-center space-x-2 text-gray-800 font-semibold hover:text-black transition bg-white px-3 py-1 rounded-full shadow-md z-50"
       >
-        <AiOutlineArrowLeft size={30} className="text-3xl" />
-        <span className="hidden md:inline text-lg">Back</span>
+        <AiOutlineArrowLeft size={20} />
+        <span className="hidden sm:inline text-sm">Back</span>
       </button>
+
       <ToastContainer
         position="top-right"
         autoClose={1200}
@@ -41,6 +44,8 @@ const ViewScreen = () => {
               key={item.id}
               product={item}
               addToCart={() => handleAddToCart(item)}
+              activeProductId={activeProductId}
+              setActiveProductId={setActiveProductId}
             />
           ))
         ) : (

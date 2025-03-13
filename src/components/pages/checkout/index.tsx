@@ -38,16 +38,15 @@ const CheckoutScreen = () => {
   };
 
   return (
-    <div className="pb-20 pt-14 min-h-screen flex items-center justify-center">
+    <div className="pb-20 pt-14 min-h-screen flex flex-col items-center">
+      <button
+        onClick={() => navigate(-1)}
+        className="absolute top-20 left-4 sm:left-6 flex items-center space-x-2 text-gray-800 font-semibold hover:text-black transition bg-white px-3 py-1 rounded-full shadow-md"
+      >
+        <AiOutlineArrowLeft size={20} />
+        <span className="hidden sm:inline text-sm">Back</span>
+      </button>
       <div className="relative max-w-4xl w-full mt-16 bg-white shadow-md rounded-lg px-6 py-6 lg:py-10">
-        <button
-          onClick={() => navigate(-1)}
-          className="absolute top-5 left-5 flex items-center space-x-2 text-gray-800 font-bold hover:text-black transition"
-        >
-          <AiOutlineArrowLeft size={30} />
-          <span className="hidden sm:inline text-lg">Back</span>
-        </button>
-
         <ToastContainer
           position="top-right"
           autoClose={1200}

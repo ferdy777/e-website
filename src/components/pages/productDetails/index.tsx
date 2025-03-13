@@ -29,14 +29,15 @@ const ProductScreen = () => {
   };
 
   return (
-    <section className="min-h-screen flex flex-col relative px-4 sm:px-6 pb-4 sm:pb-6">
+    <div className="flex flex-col min-h-screen">
       <button
         onClick={() => navigate(-1)}
-        className="fixed top-20 left-4 sm:left-6 z-50 flex items-center space-x-2 text-gray-800 font-semibold hover:text-black transition bg-white px-2 py-1 rounded-full shadow-md"
+        className="absolute top-20 left-4 sm:left-6 flex items-center space-x-2 text-gray-800 font-semibold hover:text-black transition bg-white px-3 py-1 rounded-full shadow-md"
       >
         <AiOutlineArrowLeft size={20} />
         <span className="hidden sm:inline text-sm">Back</span>
       </button>
+
       <ToastContainer
         position="top-right"
         autoClose={1200}
@@ -47,29 +48,32 @@ const ProductScreen = () => {
           padding: "6px",
         }}
       />
-      <div className="mt-28 py-36 max-w-5xl w-full mx-auto lg:py-40">
-        <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
-          <div className="flex flex-1 justify-center">
+      <main className="flex-grow flex items-center justify-center px-4">
+        <div className="w-full max-w-[90%] lg:max-w-[80%] mx-auto flex flex-col lg:flex-row justify-between items-center py-10 lg:py-20">
+          <div className="flex-1 flex justify-center p-4">
             <img
-              className="w-36 sm:w-52 lg:w-64 object-contain"
+              className="w-40 sm:w-48 md:w-56 lg:w-64 object-contain"
               src={image}
               alt={title}
             />
           </div>
-          <div className="flex-1 text-center lg:text-left space-y-3">
+          <div className="flex-1 text-center lg:text-left space-y-4 px-4">
             <h1 className="text-xl sm:text-2xl font-semibold">{title}</h1>
             <div className="text-lg text-red-500 font-medium">${price}</div>
-            <p className="text-gray-700 text-sm leading-tight">{description}</p>
+            <p className="text-gray-700 text-sm leading-relaxed">
+              {description}
+            </p>
+
             <button
               onClick={handleAddToCart}
-              className="bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800 transition w-fit mt-10"
+              className="bg-black text-white py-2 px-6 rounded-md hover:bg-gray-800 transition"
             >
               Add to Cart
             </button>
           </div>
         </div>
-      </div>
-    </section>
+      </main>
+    </div>
   );
 };
 
