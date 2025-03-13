@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+.bg_hero {
+  background-image: url("./images//bg_hero.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
